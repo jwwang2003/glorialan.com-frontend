@@ -55,7 +55,7 @@ body {
 }
 
 .nav {
-  @apply fixed h-screen w-full top-0 left-full bg-white transition-transform p-8 flex flex-col gap-4
+  @apply fixed h-full w-full top-0 left-full bg-white transition-transform p-8 flex flex-col gap-4
 }
 
 @media screen(md) {
