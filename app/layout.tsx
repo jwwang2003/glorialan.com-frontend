@@ -20,8 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " h-full flex flex-col"}>
-        <div className="min-h-full">
+      <body className={inter.className + " min-h-full flex flex-col"}>
+        <div className="min-h-full flex flex-col flex-1">
           <Header>
             <Navbar />
             <div className="md:hidden mt-auto">
