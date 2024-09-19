@@ -4,8 +4,7 @@ import Image from "next/image";
 import { ReactNode, useEffect, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { ArrowBack } from "@mui/icons-material";
+import ArrowForward from '@mui/icons-material/ArrowForward';
 import { usePathname } from "next/navigation";
 
 const DEAFULT_SIG = 2;
@@ -47,7 +46,7 @@ export default function Header({ children }: { children: ReactNode }) {
         }
       >
         <div className="ml-auto md:hidden" onClick={toggleMenu}>
-          <ArrowBackIcon />
+          <ArrowForward />
         </div>
         {children}
       </div>

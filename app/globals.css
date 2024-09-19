@@ -47,7 +47,7 @@ body {
 /* HEADER STYLES */
 
 .logo-container {
-  @apply h-full
+  @apply h-full w-full
 }
 
 .logo {
