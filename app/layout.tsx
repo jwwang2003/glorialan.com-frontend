@@ -21,17 +21,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " h-full flex flex-col"}>
-        <Header>
-          <Navbar />
-          <div className="md:hidden mt-auto">
-            <Footer>Something</Footer>
+        <div className="min-h-full">
+          <Header>
+            <Navbar />
+            <div className="md:hidden mt-auto">
+              <Footer>Something</Footer>
+            </div>
+          </Header>
+          <div className="flex flex-1 overflow-auto">
+            {children}
           </div>
-        </Header>
-        <div className="flex flex-1 overflow-auto">
-          {children}
         </div>
         <Footer>
-          stuff
+          Copyright 2024
         </Footer>
       </body>
     </html>
