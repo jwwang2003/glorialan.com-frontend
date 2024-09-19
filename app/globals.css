@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 :root {
+  position: relative;
   min-height: 100%;
+  height: 100%;
   
   /* Default font color */
   color: black;
@@ -27,7 +29,6 @@
 }
 
 body {
-  height: 200vh;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -40,5 +41,43 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+
+/* HEADER STYLES */
+
+.logo-container {
+  @apply h-full
+}
+
+.logo {
+  @apply h-full w-fit object-contain
+}
+
+.nav {
+  @apply fixed h-screen w-full top-0 left-full bg-white transition-transform p-8 flex flex-col gap-4
+}
+
+@media screen(md) {
+  /* ... */
+  .nav {
+    @apply relative h-full top-auto left-auto flex flex-row justify-end
+  }
+}
+
+.show-nav {
+  @apply -translate-x-full md:-translate-x-0
+}
+
+/* Navigation */
+
+.nav-bar {
+  @apply flex flex-col justify-center gap-6 font-light
+}
+
+@media screen(md) {
+  .nav-bar {
+    @apply flex flex-row w-full items-center justify-end gap-6 font-light
   }
 }

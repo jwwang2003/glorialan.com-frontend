@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Dispatch, SetStateAction } from "react";
 
 const links = [
   {
@@ -41,7 +42,7 @@ const links = [
 export default function Navbar() {
   
   return (
-    <div className="w-full flex flex-row items-center justify-end gap-6 font-light">
+    <div className="nav-bar">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
@@ -50,7 +51,7 @@ export default function Navbar() {
             href={link.href}
             className="text p-2"
           >
-            <p className="hidden md:block">{link.name}</p>
+            <p className="">{link.name}</p>
           </Link>
         );
       })}

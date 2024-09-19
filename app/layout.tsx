@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + " h-screen flex flex-col"}>
         <Header>
           <Navbar />
+          <div className="md:hidden mt-auto">
+            <Footer>Something</Footer>
+          </div>
         </Header>
-        {children}
+        <div className="flex flex-1 overflow-auto">
+          {children}
+        </div>
+        <Footer>
+          stuff
+        </Footer>
       </body>
     </html>
   );

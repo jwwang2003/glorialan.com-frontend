@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Uses connection pooling
+  url = env("POSTGRES_PRISMA_URL")
+  // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
+  // or you'll have dangling databases from migrations
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Albums {
+  id Int @id @default(autoincrement())
+
+  title String
+}
+
+model Media {
+  id Int @id @unique @default(autoincrement())  // PK
+  uid String @unique  // PK
+
+  create_time DateTime
+  last_modifided DateTime
+
+  title String
+  description String
+
+  memo String
+
+  album Int
+
+  photography Photography[]
+  artwork Artwork[]
+}
+
+model Artwork {
+  id  Int @id @default(autoincrement())
+
+  media Media @relation(fields: [media_id], references: [id])
+  media_id Int
+}
+
+model Photography {
+  id Int @id @default(autoincrement())
+
+  media Media @relation(fields: [media_id], references: [id])
+  media_id Int  // relation scalar field
+}
+
+model Images {
+  id Int @id @default(autoincrement())
+  media_uid String
+  image_name String
+  image_description String
+  timestamp DateTime
+  geolocation String
+
+  memo String
+}
+
+model Videos {
+  id Int @id @default(autoincrement())
+  media_uid String
+  video_name String
+  video_description String
+
+  memo String
+}
+
+model Media_Tags {
+  id Int @id @default(autoincrement())
+  media_id Int
+  tag_id Int
+  memo String
+}
+
+model Media_Tag {
+  id Int @id @default(autoincrement())
+  tag_title String
+  tag_description String
+  tag_memo String
+}
