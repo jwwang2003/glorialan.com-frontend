@@ -10,8 +10,9 @@
   color: black;
 
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 237, 237, 237;
-  --background-end-rgb: 255, 255, 255;
+  background-color: rgb(247, 247, 247);
+  /* --background-start-rgb: 237, 237, 237;
+  --background-end-rgb: 255, 255, 255; */
 }
 
 @media (prefers-color-scheme: dark) {
