@@ -62,7 +62,6 @@ export default function Navbar() {
   return (
     <div className="nav-bar">
       {links.map((link) => {
-        
         const isHighlight: boolean = link.href.split("/")[1] == currentPage;
         
         return (
