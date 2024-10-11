@@ -17,10 +17,6 @@ export default function Template({
       className="flex flex-1 overflow-auto relative"
     >
       {children}
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
     </motion.div>
   )
 }

@@ -41,7 +41,7 @@ export default function Header({ children }: { children: ReactNode }) {
 
   const openSecret = () => {
     router.push("/secret");
-    toast.success("欢迎回家！");
+    toast.success("欢迎回家！", { position: "top-center"});
   }
 
   // Handling key-binds here
@@ -66,7 +66,7 @@ export default function Header({ children }: { children: ReactNode }) {
       Keybinds(
         e,
         [
-          (e) => e.key === "Enter" && (e.ctrlKey || e.metaKey),
+          (e) => e.key === "/" && (e.ctrlKey || e.metaKey),
         ],
         [
           openSecret
@@ -105,7 +105,7 @@ export default function Header({ children }: { children: ReactNode }) {
     <header
       className="sticky top-0 bg-white h-20 flex flex-row px-8 py-2 z-10 items-center"
     >
-      <div className="logo-container pointer-events-none">
+      <div className="logo-container">
         <Image
           className="logo"
           src={`/sig${curSigId}.png`}

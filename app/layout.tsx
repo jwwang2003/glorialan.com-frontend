@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             </div>
           </Header>
           <div className="flex flex-1 overflow-auto">
+            <Toaster position="bottom-center" />
             {children}
           </div>
         </div>
