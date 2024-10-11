@@ -88,17 +88,26 @@ export default function Header({ children }: { children: ReactNode }) {
     };
   }, [router]);
 
-  // Handling signature logo long press backdoor
-  let startTimestamp:number = 0;
+  // Handling signature logo double click backdoor
+  // let startTimestamp:number = 0;
   const triggerThreshold:number = 1000;  // 1000ms (1s)
-  const onMouseUp = () => {
+  // const onMouseUp = () => {
+  //   const curTimestamp = new Date().getTime();
+  //   if(curTimestamp - startTimestamp >= triggerThreshold) {
+  //     openSecret();
+  //   }
+  // }
+  // const onMouseDown = () => {
+  //   startTimestamp = new Date().getTime();
+  // }
+  let lastClickTimestamp: number = 0;
+  const handleClick = () => {
     const curTimestamp = new Date().getTime();
-    if(curTimestamp - startTimestamp >= triggerThreshold) {
+    if (curTimestamp - lastClickTimestamp < triggerThreshold) {
       openSecret();
+    } else {
+      lastClickTimestamp = curTimestamp;
     }
-  }
-  const onMouseDown = () => {
-    startTimestamp = new Date().getTime();
   }
 
   return (
@@ -112,9 +121,9 @@ export default function Header({ children }: { children: ReactNode }) {
           width={1000}
           height={500}
           alt="Signature Logo"
-          onClick={toggleSigSwitch}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
+          onClick={handleClick}
+          // onMouseDown={onMouseDown}
+          // onMouseUp={onMouseUp}
         />
       </div>
       <div className={(menuOpen ? "show-nav " : "") + "nav"}>
