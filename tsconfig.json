@@ -12,6 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "target": "es2015",
     "plugins": [
       {
         "name": "next"
@@ -19,7 +20,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/components/*": ["./app/_components/*"]
+      "@/components/*": ["./app/_components/*"],
+      "@/lib/*": ["./app/_lib/*"],
+      "@/serverActions/*": ["./app/_serveractions/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

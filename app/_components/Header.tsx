@@ -60,7 +60,7 @@ export default function Header({ children }: { children: ReactNode }) {
       //     console.log("command + enter clicked");
       //   },
       //   fired
-      // );
+      // ); 
 
       // binding multiple keybinds
       Keybinds(
@@ -116,6 +116,7 @@ export default function Header({ children }: { children: ReactNode }) {
     >
       <div className="logo-container">
         <Image
+          priority
           className="logo"
           src={`/sig${curSigId}.png`}
           width={1000}

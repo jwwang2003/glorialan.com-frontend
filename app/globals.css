@@ -44,6 +44,10 @@ body {
   }
 }
 
+button {
+  @apply bg-black text-white px-4 py-2 h-min
+}
+
 
 /* HEADER STYLES */
 
@@ -80,4 +84,8 @@ body {
   .nav-bar {
     @apply flex flex-row w-full items-center justify-end gap-6 font-light
   }
+}
+
+input {
+  @apply px-4 py-2 outline-none
 }
