@@ -1,3 +1,16 @@
+# Glorialan.com
+
+## Features
+
+## TODO
+
+- [x] Fix scrolling issue with fullscreen nav menu in mobile view when the body div is larger that the screen itself. (Half fixed, seems only to be a problem on Safari)
+- [ ] 
+
+## Feature Requests
+
+- [ ]
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -51,9 +64,3 @@ Before connecting to a database hosted on Vercel that is connected to a project,
 ### Setting up local vercel environment variables
 
 `vercel env pull .env.development.local`
-
-
-## TODO
-
-- [x] Fix scrolling issue with fullscreen nav menu in mobile view when the body div is larger that the screen itself. (Half fixed, seems only to be a problem on Safari)
-- [ ] 
