@@ -1,0 +1,9 @@
+services: 
+  frontend:
+    container_name: glorialan.com-frontend
+    build: .
+    restart: always #change if you don't want your container restarting
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 3000:3000

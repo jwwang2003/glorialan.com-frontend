@@ -1,4 +1,6 @@
-# Glorialan.com
+# glorialan.com | The frontend service
+
+A Dockerized NextJS instance!
 
 ## Features
 
@@ -11,20 +13,26 @@
 
 - [ ]
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+### Without Docker:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+yarn build && yarn start
+```
+
+### With Docker
+
+#### Development
+```
+docker compose up -d
+```
+
+#### Production
+```
+docker compose -f "docker-compose.prod.yml" up -d --build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
