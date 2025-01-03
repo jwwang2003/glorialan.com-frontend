@@ -21,8 +21,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
@@ -57,6 +55,5 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-
 
 CMD ["node", "server.js"]
