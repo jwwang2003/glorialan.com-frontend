@@ -17,6 +17,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/mapbox-gl": "^3.4.0",
     "@types/uuid": "^10.0.0",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "classnames": "^2.5.1",
     "exifreader": "^4.23.7",

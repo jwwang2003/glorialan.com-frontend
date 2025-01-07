@@ -2,7 +2,7 @@
 
 import { useRef, ChangeEvent, useState } from "react";
 
-export default function FileUpload({ accept }: { accept: string }) {
+export default function FileUpload({ accept, handler }: { accept: string, handler: any }) {
   const ref = useRef<HTMLInputElement>(null);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
@@ -11,6 +11,8 @@ export default function FileUpload({ accept }: { accept: string }) {
   const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
     event.preventDefault();
+
+    handler(event);
 
     if (event.target.files instanceof FileList) {
       const files = event.target.files;
