@@ -9,7 +9,7 @@ import { apiRequest } from '@/lib/api';
 export default function Dashboard() {
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
-  const handleImageUpload = async (event) => {
+  const handleImageUpload = async (event: any) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
@@ -22,10 +22,9 @@ export default function Dashboard() {
         },
         method: "POST",
         onUploadProgress: function(progressEvent) {
-          var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+          var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent!.total!)
           console.log(percentCompleted)
         },
-        encType: "multipart/form-data",
         data: formData,
       }
     );
