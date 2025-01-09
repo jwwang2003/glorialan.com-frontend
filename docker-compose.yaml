@@ -12,7 +12,7 @@ services:
       #if you’re using Windows, you may need to uncomment the next line - Sol from @Kobe E
       #- WATCHPACK_POLLING=true
     volumes:
-      - root:/app              # Keep local folder in sync with the /app workdir
+      - ./:/app              # Keep local folder in sync with the /app workdir
       - node_modules:/app/node_modules
       - next_cache:/app/.next
     ports:
@@ -26,13 +26,6 @@ volumes:
   node_modules:
   
   next_cache:
-
-  root:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: .
 
 networks:
   gloria-net:

@@ -1,21 +1,17 @@
-import { genSalt, hash, compare } from "bcrypt"
+import { genSalt, hash, compare } from "bcrypt";
 import { ObjectId } from "mongodb";
 // import { v6 as uuidv6 } from "uuid"
 
-const SALT_ROUNDS = 10;
+import { ROLES } from "../../../glorialan.com-backend/src/auth";
 
-enum ROLE {
-  ADMIN,
-  USER,
-  VISITOR
-}
+const SALT_ROUNDS = 10;
 
 export function CreateUser(username: string, password: string) {
   return {
     _id: new ObjectId(),
     username,
     password,
-    role: ROLE.VISITOR
+    role: ROLES.VISITOR
   }
 }
 

@@ -10,7 +10,7 @@ export default function Secret() {
 
   return (
     <>
-      <FileUpload accept="image/jpeg, image/png"/>
+      {/* <FileUpload accept="image/jpeg, image/png"/> */}
 
       <button onClick={ () =>  { router.push('/logout'); router.refresh(); } }>Logout</button>
     </>

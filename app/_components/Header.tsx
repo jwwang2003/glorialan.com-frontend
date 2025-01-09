@@ -36,6 +36,10 @@ export default function Header({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    console.log(process.env.NODE_ENV);
+  }, []);
+
+  useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 

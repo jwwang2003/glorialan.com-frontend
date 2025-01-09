@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import FileUpload from '../_components/FlieUpload';
-import axios from "axios";
+import { apiRequest } from '@/lib/api';
 
 // import axios from 'axios';
 
@@ -13,23 +13,24 @@ export default function Dashboard() {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
+    
+    const result = await apiRequest<{name: string }>(
+      '/experimental/imageupload',
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        method: "POST",
+        onUploadProgress: function(progressEvent) {
+          var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+          console.log(percentCompleted)
+        },
+        encType: "multipart/form-data",
+        data: formData,
+      }
+    );
 
-    axios({
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      method: "POST",
-      data: formData,
-      url: "/imageupload", // route name
-      baseURL: "http://localhost:8000/experimental", //local url
-      onUploadProgress: function(progressEvent) {
-        var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-        console.log(percentCompleted)
-      },
-      encType: "multipart/form-data",
-    }).then(res => {
-      console.log(res.data)
-    })
+    console.log(result);
 
     try {
       // const response = await axios.post('/api/enhance-image', formData);
