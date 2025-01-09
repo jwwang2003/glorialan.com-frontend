@@ -10,3 +10,10 @@ services:
       - NODE_ENV=production
     ports:
       - 3000:3000
+    networks:
+      - gloria-net
+
+networks:
+  gloria-net:
+    name: gloria-net
+    external: true
