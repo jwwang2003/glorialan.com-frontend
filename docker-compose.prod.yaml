@@ -1,6 +1,6 @@
 services: 
   frontend:
-    container_name: glorialan.com-frontend
+    container_name: junweiwang03/glorialan.com-frontend
     build:
       context: .
       dockerfile: ./docker/nextjs.Dockerfile
