@@ -18,7 +18,7 @@ export async function apiRequest<T>(
       process.env.NEXT_PUBLIC_API_BASE_HOST_DEV; 
  
   try {
-    const response = await axios.request<T>({ url, baseURL: `http://${base}`,  ...config });
+    const response = await axios.request<T>({ url, baseURL: `${base}`,  ...config });
     return {
       success: true,
       data: response.data,
