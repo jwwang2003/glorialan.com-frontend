@@ -1,7 +1,10 @@
 services: 
   frontend:
     container_name: glorialan.com-frontend
-    build: .
+    build:
+      context: .
+      dockerfile: ./docker/nextjs.Dockerfile
+      target: runner
     restart: always #change if you don't want your container restarting
     environment:
       - NODE_ENV=production
