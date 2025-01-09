@@ -2,7 +2,13 @@ import { genSalt, hash, compare } from "bcrypt";
 import { ObjectId } from "mongodb";
 // import { v6 as uuidv6 } from "uuid"
 
-import { ROLES } from "../../../glorialan.com-backend/src/auth";
+// import { ROLES } from "../../../glorialan.com-backend/src/auth";
+export enum ROLES {
+  ADMIN,      // Admin has no route restriction what so ever
+  GUESTS,     // Gusts can only view public pages and other pages on spcial occasions
+  VISITOR,    // Visitors can only view public pages
+  PREVIEW
+}
 
 const SALT_ROUNDS = 10;
 
