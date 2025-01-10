@@ -35,13 +35,37 @@ docker compose up -d
 docker compose -f "docker-compose.prod.yml" up -d --build
 ```
 
-Compiling for `linux-x86`:
+Building the Docker image:
 ```
-docker build -f ./docker/nextjs.Dockerfile --platform linux/amd64,linux/arm64 -t junweiwang03/glorialan.com-frontend .
+docker build -f ./docker/nextjs.Dockerfile -t glorialan.com-frontend:latest .
+```
+
+Compiling for `linux-x86` (note that `Use containered` must be enabled in settings): 
+```
+docker build -f ./docker/nextjs.Dockerfile --platform linux/amd64,linux/arm64 -t glorialan.com-frontend:latest .
+```
+
+Tag the image for uploading:
+```
+docker tag glorialan.com-frontend:latest junweiwang03/glorialan.com-frontend
+```
+
+Push to Docker Hub:
+```
+docker push junweiwang03/glorialan.com-frontend
+```
+
+(Optionally) Clean up local images:
+```
+docker rmi junweiwang03/glorialan.com-frontend
 ```
 
 ```
-docker push junweiwang03/glorialan.com-frontend
+docker rmi junweiwang03/glorialan.com-frontend:latest
+```
+
+```
+docker rmi glorialan.com-frontend
 ```
 
 > https://hub.docker.com/repository/docker/junweiwang03/glorialan.com-frontend/general
