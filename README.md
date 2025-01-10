@@ -23,7 +23,7 @@ yarn dev
 yarn build && yarn start
 ```
 
-### With Docker
+### Using Docker 🐳
 
 #### Development
 ```
@@ -34,6 +34,19 @@ docker compose up -d
 ```
 docker compose -f "docker-compose.prod.yml" up -d --build
 ```
+
+Compiling for `linux-x86`:
+```
+docker build -f ./docker/nextjs.Dockerfile --platform linux/amd64,linux/arm64 -t junweiwang03/glorialan.com-frontend .
+```
+
+```
+docker push junweiwang03/glorialan.com-frontend
+```
+
+> https://hub.docker.com/repository/docker/junweiwang03/glorialan.com-frontend/general
+
+---
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
