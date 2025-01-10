@@ -6,7 +6,7 @@ on:
   # Trigger the action when I create or push a `release/**` branch
   push:
     branches:
-      - 'release/**'
+      - 'production/**'
 env:
   DOCKER_IMAGE_NAME: glorialan.com-frontend
   DOCKER_REGISTRY_URL: junweiwang03
