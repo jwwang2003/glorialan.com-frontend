@@ -34,7 +34,7 @@ jobs:
     # Build the Docker image
     - name: Build the Docker image
       # run: docker build . --file Dockerfile --tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION
-      run: docker build -f ./docker/nextjs.Dockerfile --platform linux/amd64,linux/arm64 -t $DOCKER_IMAGE_NAME .
+      run: docker build -f ./docker/nextjs.Dockerfile --platform linux/amd64,linux/arm64 -t glorialan.com-frontend .
     # Tag the Docker Images
     - name: Tag the image for the private registry $DOCKER_REGISTRY_URL
       run: docker tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME
