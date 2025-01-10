@@ -37,10 +37,10 @@ jobs:
       run: docker build -f ./docker/nextjs.Dockerfile --platform linux/amd64,linux/arm64 -t glorialan.com-frontend .
     # Tag the Docker Images
     - name: Tag the image for the private registry $DOCKER_REGISTRY_URL
-      run: docker tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME
+      run: docker tag $DOCKER_IMAGE_NAME $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME
 
     - name: Create a latest image as well
-      run: docker tag $DOCKER_IMAGE_NAME:$RELEASE_VERSION $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
+      run: docker tag $DOCKER_IMAGE_NAME $DOCKER_REGISTRY_URL/$DOCKER_IMAGE_NAME:latest
 
     # Push the images to the registry
     - name: Push the Docker image with version number
