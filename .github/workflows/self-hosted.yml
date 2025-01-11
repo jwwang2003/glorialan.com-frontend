@@ -1,4 +1,5 @@
 # A Github action script that automatically
+# This is the self-hosted solution and will only be used for backup/experimental purposes
 
 name: Build & release Docker image
 run-name: ${{ github.actor }} is star out GitHub Actions 🚀
@@ -7,9 +8,9 @@ on:
   # Allows us to manually trigger the action
   workflow_dispatch:
   # This action will automatically run on a push even to the production respository
-  push:
-    branches:
-      - 'production'
+  # push:
+  #   branches:
+  #     - 'production'
 env:
   DOCKER_IMAGE_NAME: glorialan.com-frontend
   DOCKER_REGISTRY_URL: junweiwang03
@@ -19,8 +20,7 @@ jobs:
     # Job name that shows in the GitHub UI
     name: Build Docker Imagesdf
     # Runner to use
-    runs-on: [linux, ubuntu-22.04, x86]
-    # runs-on: self-hosted
+    runs-on: self-hosted
 
     steps:
     - name: Checkout
