@@ -1,6 +1,7 @@
 name: Build release Docker image
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'production'
