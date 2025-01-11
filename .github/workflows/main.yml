@@ -1,12 +1,9 @@
 name: Build release Docker image
 
 on:
-  # Trigger the action manually from the UI
-  workflow_dispatch:
-  # Trigger the action when I create or push a `release/**` branch
   push:
     branches:
-      - 'production/**'
+      - 'production'
 env:
   DOCKER_IMAGE_NAME: glorialan.com-frontend
   DOCKER_REGISTRY_URL: junweiwang03
