@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 import { login } from "@/serverActions/authentication";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-
-export default function Login() {
+function Login() {
   const searchParams = useSearchParams();
   const [errorMessage, dispatch] = useFormState(login, undefined);
 
@@ -54,5 +53,15 @@ export default function Login() {
         </div>
       </form>
     </div>
+  )
+}
+
+export default function LoginWrapper() {
+  
+
+  return (
+    <Suspense>
+      <Login />
+    </Suspense>
   );
 }
