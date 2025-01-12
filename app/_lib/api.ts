@@ -1,11 +1,12 @@
 import { ENV, getEnvironment, isClient } from "./environment";
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, AxiosResponseHeaders } from 'axios';
 
 interface ApiResponse<T> {
   success: boolean;
   data: T | undefined;
   status: number | undefined;
   error: string | undefined;
+  response?: AxiosResponse<T, any>
 }
 
 export async function apiRequest<T>(
@@ -34,6 +35,7 @@ export async function apiRequest<T>(
       data: response.data,
       status: response.status,
       error: undefined,
+      response: response,
     };
   } catch (error) {
     const axiosError = error as AxiosError;

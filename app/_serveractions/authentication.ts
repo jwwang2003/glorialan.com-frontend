@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { CompareHashedPassword, CreateUser, HashPassword } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import axios from 'axios';
+import { apiRequest } from '@/lib/api';
 
 enum STATE {
   SUCESS,   // authentication success
@@ -95,31 +96,32 @@ export async function login(_currentState: any, formData: FormData) {
 
   const { redirect_path, username, password } = { ...validatedFields.data };
 
-  let result;
-  try {
-    result = await axios({
+  const result = await apiRequest<{
+
+  }>(
+    "auth/login",
+    {
       headers: {
-        "Content-Type": "application/json; charset=utf-8"
+        'Content-Type': 'application/json'
       },
       method: "POST",
-      url: "",
-      baseURL: "http://backend:8000/auth/login",
       data: JSON.stringify({ username, password })
-    });
-  } catch (e) {
-      return {
-        message: STATE.WRONGCRED
-      };
-  }
+    }
+  )
 
   if (result) {
-    console.log(result.data);
+    console.log(result);
   }
 
   if (result.status === 200) {
     // 2. Capture the 'Set-Cookie' header from the backend
     // Note that fetch returns headers in a case-insensitive map
-    const setCookieHeader = result.headers.get('set-cookie');
+    const headers = result.response?.headers;
+
+    let setCookieHeader;
+    if (headers) {
+      setCookieHeader = headers['set-cookie'];
+    }
 
     // 3. If the backend sets cookies, forward them to the client
     if (setCookieHeader) {
@@ -133,13 +135,15 @@ export async function login(_currentState: any, formData: FormData) {
       // cookies().set('Set-Cookie', setCookieHeader);
       Object.entries(parsed).forEach(([name, value]) => {
         // console.log(name, value);
-        cookies().set(name, value, {
-          path: '/',           // or your desired path
-          httpOnly: true,      // if you want it inaccessible to JS
-          secure: true,     // typically 'true' in production over HTTPS
-          sameSite: 'none', // often needed if crossing domains
-          // domain: 'localhost:8000',    // if you need a specific domain
-        });
+        if (value) {
+          cookies().set(name, value, {
+            path: '/',           // or your desired path
+            httpOnly: true,      // if you want it inaccessible to JS
+            secure: true,     // typically 'true' in production over HTTPS
+            sameSite: 'none', // often needed if crossing domains
+            // domain: 'localhost:8000',    // if you need a specific domain
+          });
+        }
       });
       // Depending on your needs, you might want to manipulate
       // the cookie attributes (domain, path, etc.), or replicate them as-is.

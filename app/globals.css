@@ -26,6 +26,21 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+
+  .nav {
+    @apply !text-white !bg-black
+  }
+
+  @media screen(md) {
+    .nav {
+      @apply !text-black !bg-white
+    }
+  }
+
+
+  .footer {
+    @apply !bg-white !text-black;
+  }
 }
 
 body {
@@ -52,7 +67,7 @@ button {
 /* HEADER STYLES */
 
 .logo-container {
-  @apply h-full w-full
+  @apply h-full w-auto  
 }
 
 .logo {
@@ -72,6 +87,11 @@ button {
 
 .show-nav {
   @apply -translate-x-full md:-translate-x-0
+}
+
+/* FOOTER STYLES */
+.footer {
+  @apply text-white bg-black flex flex-row px-5 py-3 font-extralight;
 }
 
 /* Navigation */

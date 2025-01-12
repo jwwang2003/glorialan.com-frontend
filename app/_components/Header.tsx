@@ -139,7 +139,7 @@ export default function Header({ children }: { children: ReactNode }) {
         {children}
       </div>
       <div className="ml-auto md:hidden" onClick={toggleMenu}>
-        <MenuIcon />
+        <MenuIcon className="text-black"/>
       </div>
     </header>
   );
