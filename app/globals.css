@@ -89,3 +89,24 @@ button {
 input {
   @apply px-4 py-2 outline-none
 }
+
+.horizontal-collection {
+  @apply flex flex-col;
+  height: 175px;
+}
+
+@media screen(md) {
+  .horizontal-collection {
+    height: 300px;
+  }
+}
+
+.horizontal-collection img {
+  z-index: 0;
+  @apply transition-transform
+}
+
+.horizontal-collection img:hover {
+  z-index: 100;
+  transform: translateY(-5px);
+}

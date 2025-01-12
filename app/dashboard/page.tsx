@@ -26,6 +26,7 @@ export default function Dashboard() {
           console.log(percentCompleted)
         },
         data: formData,
+        withCredentials: true
       }
     );
 

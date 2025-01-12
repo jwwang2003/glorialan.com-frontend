@@ -16,3 +16,7 @@ export function getEnvironment() {
       return undefined;
   }
 }
+
+export function isClient(): boolean {
+  return typeof window !== 'undefined';
+}

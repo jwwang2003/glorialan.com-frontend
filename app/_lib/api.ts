@@ -1,10 +1,11 @@
-import { ENV, getEnvironment } from "./environment";
+import { ENV, getEnvironment, isClient } from "./environment";
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 interface ApiResponse<T> {
   success: boolean;
-  data: T | null;
-  error: string | null;
+  data: T | undefined;
+  status: number | undefined;
+  error: string | undefined;
 }
 
 export async function apiRequest<T>(
@@ -15,20 +16,31 @@ export async function apiRequest<T>(
   const base = 
     (env == ENV.production) ?
       process.env.NEXT_PUBLIC_API_BASE_HOST_PROD : 
-      process.env.NEXT_PUBLIC_API_BASE_HOST_DEV; 
+      (
+        isClient() ? 
+        process.env.NEXT_PUBLIC_API_BASE_HOST_DEV_ :
+        process.env.NEXT_PUBLIC_API_BASE_HOST_DEV
+      );
  
   try {
-    const response = await axios.request<T>({ url, baseURL: `${base}`,  ...config });
+    const response = await axios.request<T>({
+      url, 
+      baseURL: `${base}`,
+      withCredentials: true,
+      ...config
+    });
     return {
       success: true,
       data: response.data,
-      error: null,
+      status: response.status,
+      error: undefined,
     };
   } catch (error) {
     const axiosError = error as AxiosError;
     return {
       success: false,
-      data: null,
+      data: undefined,
+      status: axiosError.status,
       error: axiosError.response?.data
         ? JSON.stringify(axiosError.response?.data)
         : axiosError.message,

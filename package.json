@@ -20,6 +20,7 @@
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "classnames": "^2.5.1",
+    "cookie": "^1.0.2",
     "exifreader": "^4.23.7",
     "framer-motion": "^11.11.7",
     "i": "^0.3.7",
