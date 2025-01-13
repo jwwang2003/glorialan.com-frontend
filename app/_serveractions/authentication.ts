@@ -98,6 +98,8 @@ export async function login(_currentState: any, formData: FormData) {
     }
   );
 
+  console.log(result);
+
   if (result.status === 200) {
     // 2. Capture the 'Set-Cookie' header from the backend
     // Note that fetch returns headers in a case-insensitive map
