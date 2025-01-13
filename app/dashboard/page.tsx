@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import FileUpload from '../_components/FlieUpload';
+import { apiRequest } from '@/_lib/api';
 
 export default function Dashboard() {
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -42,19 +43,31 @@ export default function Dashboard() {
 
     // Perform the fetch request with the stream as the body
     try {
-      const response = await fetch('/experimental/imageupload', {
+      // const response = await apiRequest<{name: string }>(
+      //   '/experimental/imageupload',
+      //   {
+      //     headers: {
+      //       // "Content-Type": "multipart/form-data",
+      //       "Content-Type": "application/octet-stream"
+      //     },
+      //     method: "POST",
+      //     duplex: "half",
+      //     body: stream,
+      //     withCredentials: true
+      //   }
+      // );
+
+      const response = await fetch('http://backend:8000/experimental/imageupload', {
         method: 'POST',
         body: stream,
+        // Usually 'duplex: "half"' is the correct setting in browsers that support streaming
         duplex: 'half',
         headers: {
-          "Content-Type": "text/plain"
-        }
-        // Some environments may still be experimenting with the 'duplex' option
-        // In that case, you may need to remove it or use a polyfill approach.
+          'Content-Type': 'application/octet-stream',
+        },
       });
 
-      const result = await response.json();
-      console.log('Server Response:', result);
+      console.log('Server Response:', response);
 
     } catch (error) {
       console.error('Error while uploading:', error);

@@ -17,6 +17,7 @@ interface FetchRequestConfig {
   headers?: Record<string, string>;
   body?: unknown;            // for JSON body, FormData, etc.
   withCredentials?: boolean; // to mimic axios "withCredentials"
+  duplex?: string
 }
 
 export async function apiRequest<T>(
