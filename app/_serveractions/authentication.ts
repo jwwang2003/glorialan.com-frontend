@@ -3,21 +3,10 @@
 import { cookies } from 'next/headers';
 import { parse } from 'cookie';
 
-// import { connectToMongoDB } from "@/lib/mongodb";
-
 import { z } from 'zod';
-import { CompareHashedPassword, CreateUser, HashPassword } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import axios from 'axios';
 import { apiRequest } from '@/lib/api';
-
-enum STATE {
-  SUCESS,   // authentication success
-  WRONGCRED,  // wrong credentials
-
-  VALIDATIONERROR,
-  USERTAKEN,
-}
+import { STATE } from '@/Types';
 
 const AUTH_SCHEMA = z.object({
   redirect_path: z.string().optional(),
@@ -27,7 +16,7 @@ const AUTH_SCHEMA = z.object({
   }).min(1),
   password: z.string({
     required_error: "Password cannot be empty",
-  }).min(1)
+  }).min(8)
 })
 
 export async function register(_currentState: any, formData: FormData) {
@@ -99,19 +88,15 @@ export async function login(_currentState: any, formData: FormData) {
   const result = await apiRequest<{
 
   }>(
-    "auth/login",
+    "/auth/login",
     {
       headers: {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      data: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password })
     }
-  )
-
-  if (result) {
-    console.log(result);
-  }
+  );
 
   if (result.status === 200) {
     // 2. Capture the 'Set-Cookie' header from the backend
@@ -120,7 +105,7 @@ export async function login(_currentState: any, formData: FormData) {
 
     let setCookieHeader;
     if (headers) {
-      setCookieHeader = headers['set-cookie'];
+      setCookieHeader = headers.getSetCookie();
     }
 
     // 3. If the backend sets cookies, forward them to the client
@@ -131,62 +116,27 @@ export async function login(_currentState: any, formData: FormData) {
       // For simplicity, assume it's just one.
       
       const parsed = parse(setCookieHeader[0]);
-      // console.log(setCookieHeader, parsed);
-      // cookies().set('Set-Cookie', setCookieHeader);
       Object.entries(parsed).forEach(([name, value]) => {
-        // console.log(name, value);
         if (value) {
           cookies().set(name, value, {
-            path: '/',           // or your desired path
-            httpOnly: true,      // if you want it inaccessible to JS
-            secure: true,     // typically 'true' in production over HTTPS
-            sameSite: 'none', // often needed if crossing domains
-            // domain: 'localhost:8000',    // if you need a specific domain
+            path: '/',            // or your desired path
+            httpOnly: true,       // if you want it inaccessible to JS
+            secure: true,         // typically 'true' in production over HTTPS
+            sameSite: 'none',     // often needed if crossing domains
+            // domain: 'localhost:',    // if you need a specific domain
           });
         }
       });
       // Depending on your needs, you might want to manipulate
       // the cookie attributes (domain, path, etc.), or replicate them as-is.
       redirect(redirect_path || "/");
+      // No need to return here
     }
     return 
   } else {
     return {
-      message: STATE.WRONGCRED
-    };
+      message: STATE.WRONGCRED,
+      errors: undefined
+    }
   }
-
-  // const { database } = awadockt connectToMongoDB();
-
-  // if (!database || !process.env.NEXT_ATLAS_USERS_COLLECTION) {
-  //   return {};
-  // }
-
-  // const collection = database!.collection(process.env.NEXT_ATLAS_USERS_COLLECTION);
-
-  // const user_query = await collection.find({
-  //   username
-  // });
-
-  // const user = await user_query.toArray();
-  // if (user.length == 0) return {
-  //   message: STATE.WRONGCRED,
-  // }
-  // else {
-  //   // const hashedPassword = await HashPassword(password);
-  //   const check = await CompareHashedPassword(password, user[0].password);
-  //   if (check) {
-  //     cookies().set('session', username, {
-  //       httpOnly: true,
-  //       secure: process.env.NODE_ENV === 'production',
-  //       maxAge: 60 * 60 * 24 * 7, // One week
-  //       path: '/',
-  //     });
-  //     redirect("/");
-  //   } else {
-  //     return {
-  //       message: STATE.WRONGCRED
-  //     }
-  //   }
-  // }
 }

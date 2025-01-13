@@ -29,7 +29,7 @@ export default function RootLayout({
               <Footer>Something</Footer>
             </div>
           </Header>
-          <div className="flex flex-1">
+          <div className="main">
             <Toaster position="bottom-center" />
             {children}
           </div>

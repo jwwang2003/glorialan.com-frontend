@@ -44,7 +44,7 @@ export default function Header({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   const openSecret = () => {
-    router.push("/secret");
+    router.push("/dashboard");
     toast.success("欢迎回家！", { position: "top-center"});
   }
 
