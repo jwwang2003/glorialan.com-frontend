@@ -28,7 +28,10 @@ function Login() {
 
     switch(response.message) {
       case STATE.SUCESS: {
-        router.push("/");
+        
+        // router.push("/");
+        toast.success("Authenticated", { position: "top-center"});
+        break;
       }
       case STATE.WRONGCRED: {
         toast.error("Authentication failure", { position: "top-center"});

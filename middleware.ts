@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { apiRequest } from "./app/_lib/api";
 import { PROTECTED_ROUTES } from "./protected";
+import { redirect } from "next/dist/server/api-utils";
 
 export async function middleware(request: NextRequest) {
   //////////////////////////////////////////////////////////////////////////////
@@ -12,6 +13,7 @@ export async function middleware(request: NextRequest) {
     const response = NextResponse.next();
     response.cookies.delete('connect.sid');
     return response;
+    // return Response.redirect("/");
   }
 
   // Next comes session management
