@@ -24,7 +24,6 @@ services:
 
 volumes:
   node_modules:
-  
   next_cache:
 
 networks:
