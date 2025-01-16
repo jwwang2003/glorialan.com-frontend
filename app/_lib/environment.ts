@@ -20,3 +20,12 @@ export function getEnvironment() {
 export function isClient(): boolean {
   return typeof window !== 'undefined';
 }
+
+export function getBaseHostname(): string {
+  const prod_mode = process.env.NEXT_PUBLIC_API_BASE_HOST_PROD || "";
+  const dev_mode = (isClient()
+    ? process.env.NEXT_PUBLIC_API_BASE_HOST_DEV_
+    : process.env.NEXT_PUBLIC_API_BASE_HOST_DEV) || "";
+  
+  return (getEnvironment() === ENV.production ? prod_mode : dev_mode);
+}

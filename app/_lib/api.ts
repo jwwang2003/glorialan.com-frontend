@@ -1,4 +1,4 @@
-import { ENV, getEnvironment, isClient } from "./environment";
+import { getBaseHostname } from "./environment";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -24,15 +24,8 @@ export async function apiRequest<T>(
   url: string,
   config?: FetchRequestConfig
 ): Promise<ApiResponse<T>> {
-  const env = getEnvironment();
-  const base =
-    env === ENV.production
-      ? process.env.NEXT_PUBLIC_API_BASE_HOST_PROD
-      : isClient()
-        ? process.env.NEXT_PUBLIC_API_BASE_HOST_DEV_
-        : process.env.NEXT_PUBLIC_API_BASE_HOST_DEV;
-
-  const fullUrl = `${base}${url}`;
+  const base = getBaseHostname();
+  const fullUrl = new URL(base, url);
   
   try {
     const response = await fetch(fullUrl, {

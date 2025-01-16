@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowForward from "@mui/icons-material/ArrowForward";
@@ -35,18 +35,18 @@ export default function Header({ children }: { children: ReactNode }) {
     setMenuOpen(!menuOpen);
   };
 
-  useEffect(() => {
-    console.log(process.env.NODE_ENV);
-  }, []);
+  // useEffect(() => {
+  //   console.log(process.env.NODE_ENV);
+  // }, []);
 
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 
-  const openSecret = () => {
+  const openSecret = useCallback(() => {
     router.push("/dashboard");
-    toast.success("欢迎回家！", { position: "top-center"});
-  }
+    toast.success("欢迎回家！", { position: "top-center" });
+  }, [router]);
 
   // Handling key-binds here
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function Header({ children }: { children: ReactNode }) {
       document.body.removeEventListener("keydown", onKeyDown);
       document.body.removeEventListener("keyup", onKeyUp);
     };
-  }, [router]);
+  }, [router, openSecret]);
 
   // Handling signature logo double click backdoor
   // let startTimestamp:number = 0;

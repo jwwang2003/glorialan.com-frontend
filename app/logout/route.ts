@@ -1,6 +1,6 @@
+import { getBaseHostname } from "@/_lib/environment";
 import { NextResponse } from "next/server"
 
-export function GET(req: Request) {
-  console.log(req.url);
-  return NextResponse.redirect(new URL('http://localhost:3000'));
+export function GET() {
+  return NextResponse.redirect(new URL(getBaseHostname()));
 }
