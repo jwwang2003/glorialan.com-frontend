@@ -61,7 +61,7 @@ export default function Dashboard() {
         method: 'POST',
         body: stream,
         // Usually 'duplex: "half"' is the correct setting in browsers that support streaming
-        duplex: 'half',
+        // duplex: 'half',
         headers: {
           'Content-Type': 'application/octet-stream',
         },
