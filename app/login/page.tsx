@@ -5,9 +5,10 @@ import { Suspense, useEffect } from "react";
 import { login } from "@/serverActions/authentication";
 import { useFormState } from "react-dom";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { STATE } from "@/Types";
+import { Router } from "next/router";
 
 export type State = {
   errors?: any,
@@ -15,6 +16,7 @@ export type State = {
 }
 
 function Login() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [response, dispatch] = useFormState(login, undefined);
 
@@ -25,6 +27,9 @@ function Login() {
     if (!response) return;
 
     switch(response.message) {
+      case STATE.SUCESS: {
+        router.push("/");
+      }
       case STATE.WRONGCRED: {
         toast.error("Authentication failure", { position: "top-center"});
         break;
