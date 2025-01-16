@@ -131,7 +131,7 @@ export async function login(_currentState: any, formData: FormData) {
       });
       // Depending on your needs, you might want to manipulate
       // the cookie attributes (domain, path, etc.), or replicate them as-is.
-      redirect(redirect_path || "/");
+      redirect("/");
       // No need to return here
     }
     return 
