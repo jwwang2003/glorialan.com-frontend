@@ -25,7 +25,8 @@ export async function apiRequest<T>(
   config?: FetchRequestConfig
 ): Promise<ApiResponse<T>> {
   const base = getBaseHostname();
-  const fullUrl = new URL(base, url);
+  console.log(base);
+  const fullUrl = new URL(url, base);
   
   try {
     const response = await fetch(fullUrl, {
