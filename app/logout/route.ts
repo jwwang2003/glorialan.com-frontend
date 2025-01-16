@@ -1,4 +1,4 @@
-import { getBaseHostname } from "@/_lib/environment";
+import { getBaseHostname } from "@/lib/environment";
 import { NextResponse } from "next/server"
 
 export function GET() {
