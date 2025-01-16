@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { redirect } from "next/navigation";
 import { apiRequest } from '@/lib/api';
 import { STATE } from '@/Types';
+import { getBaseHostname } from '@/_lib/environment';
 
 const AUTH_SCHEMA = z.object({
   redirect_path: z.string().optional(),
@@ -131,7 +132,7 @@ export async function login(_currentState: any, formData: FormData) {
       });
       // Depending on your needs, you might want to manipulate
       // the cookie attributes (domain, path, etc.), or replicate them as-is.
-      redirect("https://glorialan.com");
+      redirect(getBaseHostname());
       // return {
       //   message: STATE.SUCESS,
       //   errors: undefined

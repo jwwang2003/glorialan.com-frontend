@@ -1,19 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { apiRequest } from "./app/_lib/api";
 import { PROTECTED_ROUTES } from "./protected";
-import { redirect } from "next/dist/server/api-utils";
+import { getAPIBaseHostname, getBaseHostname } from "@/_lib/environment";
 
 export async function middleware(request: NextRequest) {
   //////////////////////////////////////////////////////////////////////////////
   //////////                   Authentication Logic                   //////////
   //////////////////////////////////////////////////////////////////////////////
-
   if (request.nextUrl.pathname.startsWith('/logout')) {
     // Handles logout logic by removing session cookies
     const response = NextResponse.next();
     response.cookies.delete('connect.sid');
     return response;
-    // return Response.redirect("/");
+    // return NextResponse.redirect(new URL("/", getBaseHostname()));
   }
 
   // Next comes session management
@@ -50,7 +49,6 @@ export async function middleware(request: NextRequest) {
       const [_, allowedRoles] = matchingEntry; // e.g. ['/admin', ['admin']]
       if (!allowedRoles.includes(role)) {
         // If role not allowed, redirect to login or a 403 page
-        console.log(currentPath)
         return NextResponse.redirect(new URL(`/login?redirect=${currentPath}`, request.url));
       }
     }
@@ -63,7 +61,7 @@ export async function middleware(request: NextRequest) {
 
   // Handling protected routes
   if (!currentSession && matchingEntry) {
-    return Response.redirect(new URL(`/login?redirect=${currentPath}`, request.url));
+    return NextResponse.redirect(new URL(`/login?redirect=${currentPath}`, request.url));
   }
 
   // If everything goes smoothly

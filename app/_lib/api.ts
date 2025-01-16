@@ -1,4 +1,4 @@
-import { getBaseHostname } from "./environment";
+import { getAPIBaseHostname } from "./environment";
 
 interface ApiResponse<T> {
   success: boolean;
@@ -24,7 +24,7 @@ export async function apiRequest<T>(
   url: string,
   config?: FetchRequestConfig
 ): Promise<ApiResponse<T>> {
-  const base = getBaseHostname();
+  const base = getAPIBaseHostname();
   console.log(base);
   const fullUrl = new URL(url, base);
   
