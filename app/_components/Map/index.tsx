@@ -26,13 +26,15 @@ export default function MapRoot({ map_id, map_key }: MapParam) {
 
   // Handler for dynamically placing a new marker where the user clicks
   const handleMapClick = (event: MapEvent<MouseEvent>) => {
-    const { lngLat } = event;
+    // const { lngLat } = event;
     // Append a new marker with a generic label
     setMarkers((prev) => [
       ...prev,
       {
-        longitude: lngLat[0],
-        latitude: lngLat[1],
+        // longitude: lngLat[0],
+        // latitude: lngLat[1],
+        longitude: 1,
+        latitude: 1,
         label: 'New Place',
       }
     ]);
@@ -48,7 +50,7 @@ export default function MapRoot({ map_id, map_key }: MapParam) {
       style={{ width: '100%', height: '100%', zIndex: 0 }}
       mapStyle={`https://api.maptiler.com/maps/${map_id}/style.json?key=${map_key}`}
       scrollZoom={false}
-      onClick={handleMapClick}
+      // onClick={handleMapClick}
     >
       <NavigationControl />
 

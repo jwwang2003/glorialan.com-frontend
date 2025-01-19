@@ -1,9 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { apiRequest } from "./app/_lib/api";
-import { getBaseHostname } from "@/_lib/environment";
-import { definedPaths, findLongestProtectedMatch } from "./paths"; 
-
-// (Wherever you placed the 'findLongestProtectedMatch' function)
+import { apiRequest } from "@/lib/api";
+import { definedPaths, findLongestProtectedMatch } from "./paths";
 
 export async function middleware(request: NextRequest) {
   //////////////////////////////////////////////////////////////////////////////
@@ -33,7 +30,7 @@ export async function middleware(request: NextRequest) {
     // If not logged in at all, redirect
     if (!currentSession) {
       return NextResponse.redirect(
-        new URL(`/login?redirect=${currentPath}`, request.url)
+        new URL(`/auth?redirect=${currentPath}`, request.url)
       );
     }
 
@@ -59,13 +56,13 @@ export async function middleware(request: NextRequest) {
       if (allowedRoles && !allowedRoles.includes(userRole)) {
         // If role not allowed, redirect to login or a 403 page
         return NextResponse.redirect(
-          new URL(`/login?redirect=${currentPath}`, request.url)
+          new URL(`/auth?redirect=${currentPath}`, request.url)
         );
       }
     } else {
       // If we couldn't retrieve user data for some reason, redirect to login
       return NextResponse.redirect(
-        new URL(`/login?redirect=${currentPath}`, request.url)
+        new URL(`/auth?redirect=${currentPath}`, request.url)
       );
     }
   }
