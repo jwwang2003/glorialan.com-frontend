@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useState } from 'react';
-import FileUpload from '../_components/FlieUpload';
-import { apiRequest } from '@/_lib/api';
+import FileUpload from '../_components/FileUpload';
+import Link from 'next/link';
 
 export default function Dashboard() {
   const [uploadPercentage, setUploadPercentage] = useState(0);
@@ -76,6 +76,7 @@ export default function Dashboard() {
 
   return (
     <div>
+      
       <p>Upload progress: {uploadPercentage}%</p>
       <FileUpload accept="image/jpeg, image/png" handler={handleImageUpload} />
     </div>

@@ -63,15 +63,71 @@ body {
   }
 }
 
+/* Button style */
+
+.button_white {
+  @apply text-black bg-slate-50 hover:bg-slate-100 border-neutral-300;
+}
+
+.button_white > .progress_bar  {
+  @apply bg-neutral-200;
+}
+
+.button_pink {
+  @apply text-pink-700 bg-pink-50 hover:bg-pink-100 border-pink-500;
+}
+
+.button_pink > .progress_bar {
+  @apply bg-pink-200;
+}
+
+.button_red {
+  @apply text-red-700 bg-red-50 hover:bg-red-100 border-red-500;
+}
+
+.button_red > .progress_bar {
+  @apply bg-red-200;
+}
+
+.button_green {
+  @apply text-green-700 bg-green-50 hover:bg-green-100 border-green-500;
+}
+
+.button_green > .progress_bar {
+  @apply bg-green-200;
+}
+.button_blue {
+  @apply text-blue-700 bg-blue-50 hover:bg-blue-100 border-blue-500;
+}
+
+.button_blue > .progress_bar {
+  @apply bg-blue-200;
+}
+
+.progress_bar {
+  @apply absolute left-0 top-0 h-full rounded
+    transition-all duration-500 ease-out overflow-hidden
+    flex justify-end items-center pr-2
+    pointer-events-none
+    bg-neutral-300;
+}
+
 button {
-  @apply bg-black text-white px-4 py-2 h-min dark:bg-white dark:text-black;
+  @apply z-10 text-sm py-2 px-4 rounded font-semibold border border-neutral-200
+    relative inline-flex flex-row justify-center items-center
+    dark:bg-white dark:text-black hover:bg-neutral-100 transition-colors;
+}
+
+/* Input style */
+
+input {
+  @apply px-4 py-2 outline-none dark:text-black rounded;
 }
 
 /* Mini Components */
 .divider {
   @apply divide-y divide-gray-800 dark:divide-gray-100;
 }
-
 
 /* HEADER STYLES */
 
@@ -115,10 +171,6 @@ button {
   }
 }
 
-input {
-  @apply px-4 py-2 outline-none dark:text-black;
-}
-
 .horizontal-collection {
   @apply flex flex-col;
   height: 175px;
@@ -139,3 +191,18 @@ input {
   z-index: 100;
   transform: translateY(-5px);
 }
+
+/* DASHBOARD */
+.dashboard {
+  @apply flex flex-1 flex-col w-full;
+}
+
+.dashboard-nav {
+  @apply flex flex-row overflow-x-scroll bg-black text-white;
+}
+
+.dashboard-nav .nav-link {
+  @apply py-3 px-4 text-nowrap;
+}
+
+/* Ingest Station */

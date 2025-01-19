@@ -24,7 +24,9 @@ export default function RootLayout({
       <body className={inter.className + " min-h-full flex flex-col"}>
         <div className="min-h-full flex flex-col flex-1">
           <Header>
-            <Navbar />
+            <div className="nav-bar">
+              <Navbar />
+            </div>
             <div className="md:hidden mt-auto">
               <Footer>Something</Footer>
             </div>

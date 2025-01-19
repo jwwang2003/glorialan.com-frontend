@@ -10,7 +10,7 @@ import { STATE } from '@/Types';
 import { getBaseHostname } from '@/_lib/environment';
 
 const AUTH_SCHEMA = z.object({
-  redirect_path: z.string().optional(),
+  redirect_path: z.string(),
   username: z.string({
     required_error: "Username cannot be empty",
     invalid_type_error: "Invalid username",
@@ -18,56 +18,7 @@ const AUTH_SCHEMA = z.object({
   password: z.string({
     required_error: "Password cannot be empty",
   }).min(8)
-})
-
-export async function register(_currentState: any, formData: FormData) {
-  const validatedFields = AUTH_SCHEMA.safeParse({
-    username: formData.get('username'),
-    password: formData.get('password'),
-  });
-
-  // Return early if the form data is invalid
-  if (!validatedFields.success) {
-    return {
-      message: STATE.VALIDATIONERROR,
-      errors: validatedFields.error.flatten().fieldErrors,
-    }
-  }
-
-  const { username, password } = { ...validatedFields.data };
-
-  // first establish a DB connection
-  // const { database } = await connectToMongoDB();
-
-  // if (!database || !process.env.NEXT_ATLAS_USERS_COLLECTION) {
-  //   console.log('db error')
-  //   return {};
-  // }
-
-  // const collection = database!.collection(process.env.NEXT_ATLAS_USERS_COLLECTION);
-
-  // const user_query = await collection.find({
-  //   username
-  // })
-
-  // const user = await user_query.toArray();
-
-  // if (!user.length) {
-  //   // user DNE (does not exist)
-  //   const hashedPassword = await HashPassword(password);
-  //   await collection.insertOne(CreateUser(username, hashedPassword));
-  // } else {
-  //   return {
-  //     message: STATE.USERTAKEN
-  //   }
-  // }
-
-  redirect('/login');
-
-  // return {
-  //   message: STATE.SUCESS
-  // }
-}
+});
 
 export async function login(_currentState: any, formData: FormData) {
   const validatedFields = AUTH_SCHEMA.safeParse({
@@ -85,10 +36,7 @@ export async function login(_currentState: any, formData: FormData) {
   }
 
   const { redirect_path, username, password } = { ...validatedFields.data };
-
-  const result = await apiRequest<{
-
-  }>(
+  const result = await apiRequest<{}>(
     "/auth/login",
     {
       headers: {
@@ -98,8 +46,6 @@ export async function login(_currentState: any, formData: FormData) {
       body: JSON.stringify({ username, password })
     }
   );
-
-  console.log(result);
 
   if (result.status === 200) {
     // 2. Capture the 'Set-Cookie' header from the backend
@@ -117,8 +63,8 @@ export async function login(_currentState: any, formData: FormData) {
       // Sometimes backends return multiple Set-Cookie headers,
       // in which case you'd parse them individually.
       // For simplicity, assume it's just one.
-      
       const parsed = parse(setCookieHeader[0]);
+      console.log(parsed);
       Object.entries(parsed).forEach(([name, value]) => {
         if (value) {
           cookies().set(name, value, {
@@ -132,12 +78,11 @@ export async function login(_currentState: any, formData: FormData) {
       });
       // Depending on your needs, you might want to manipulate
       // the cookie attributes (domain, path, etc.), or replicate them as-is.
-      redirect(getBaseHostname());
-      // return {
-      //   message: STATE.SUCESS,
-      //   errors: undefined
-      // }
-      // No need to return here
+      // if (redirect_path)
+      //   redirect(new URL(redirect_path, getBaseHostname()).toString());
+      // else
+      //   redirect(getBaseHostname());
+      redirect(new URL(redirect_path, getBaseHostname()).toString());
     }
     return 
   } else {
